@@ -5,7 +5,6 @@ using namespace sf;
 Tile::Tile()
 {
 	this->shape = std::make_unique<RectangleShape>(Vector2f(this->size, this->size));
-	this->setType(TileType::Wall);
 }
 Tile::Tile(float posX, float posY)
 {
@@ -24,7 +23,6 @@ void Tile::createWalls()
 		switch (static_cast<Direction>(i))
 		{
 		case Direction::Up:
-			if (position.y >= 0)
 			{
 				std::unique_ptr<RectangleShape> rect = std::make_unique<RectangleShape>();
 				rect->setPosition(Vector2f(position.x * 32, position.y * 32));
@@ -34,7 +32,6 @@ void Tile::createWalls()
 			}
 			break;
 		case Direction::Right:
-			if (position.x < 16)
 			{
 				std::unique_ptr<RectangleShape> rect = std::make_unique<RectangleShape>();
 				rect->setPosition(Vector2f(position.x * 32 + 30, position.y * 32));
@@ -44,7 +41,6 @@ void Tile::createWalls()
 			}
 			break;
 		case Direction::Down:
-			if (position.y < 16)
 			{
 				std::unique_ptr<RectangleShape> rect = std::make_unique<RectangleShape>();
 				rect->setPosition(Vector2f(position.x * 32, (position.y * 32) + 30));
@@ -54,7 +50,6 @@ void Tile::createWalls()
 			}
 			break;
 		case Direction::Left:
-			if (position.x >= 0)
 			{
 				std::unique_ptr<RectangleShape> rect = std::make_unique<RectangleShape>();
 				rect->setPosition(Vector2f(position.x * 32, position.y * 32));
@@ -66,23 +61,7 @@ void Tile::createWalls()
 		}
 	}
 }
-void Tile::setType(TileType type)
-{
-	this->type = type;
-	switch (type)
-	{
-	case TileType::Empty:
-		this->setColor(sf::Color(50, 50, 50, 255));
-		break;
-	case TileType::Wall:
-		this->setColor(sf::Color(200, 200, 200, 255));
-		break;
-	}
-}
-TileType Tile::getType()
-{
-	return this->type;
-}
+
 Vector2f Tile::getPosition()
 {
 	return this->position;
