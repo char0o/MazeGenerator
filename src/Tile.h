@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
-#include "Direction.h";
+#include "Direction.h"
 
 using namespace sf;
 class Tile

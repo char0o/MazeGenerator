@@ -1,7 +1,7 @@
 #pragma once
 #include "Tile.h"
 #include "SFML/Graphics.hpp"
-
+#include <memory>
 #define MAP_SIZE 16
 class TileMap
 {
