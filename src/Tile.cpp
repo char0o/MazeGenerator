@@ -91,7 +91,15 @@ void Tile::draw(RenderWindow& window)
 		}
 	}
 }
+bool Tile::hasWall(Direction direction)
+{
+	return this->walls[direction] != NULL;
+}
 void Tile::setColor(const Color& color)
 {
 	this->shape->setFillColor(color);
+}
+bool Tile::operator==(const Tile& other) const
+{
+	return this->position == other.position;
 }

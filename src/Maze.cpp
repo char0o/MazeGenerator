@@ -71,3 +71,51 @@ void Maze::backTracker(Tile& current, std::set<Tile*>& visited)
 		}
 	}
 }
+void Maze::bfs(Tile& start, RenderWindow& window)
+{
+	std::vector<Tile*> visited;
+	std::queue<Tile*> frontier;
+	std::unordered_map<Tile*, Tile*> parent;
+	parent[&start] = NULL;
+	frontier.push(&start);
+	visited.push_back(&start);
+	while (!frontier.empty())
+	{
+		Tile* tile = frontier.front();
+		tile->setColor(Color(255, 0, 0, 255));
+		frontier.pop();
+		std::vector<Tile*> neighbors = this->getMap()->getNeighborsWalls(*tile);
+		for (int i = 0; i < neighbors.size(); i++)
+		{
+			neighbors[i]->setColor(Color(255, 0, 0, 255));			
+			window.clear();
+			this->getMap()->drawTiles(window);
+			window.display();
+			if (neighbors[i] == this->endTile)
+			{
+				parent[neighbors[i]] = tile;
+				std::vector<Tile*> path;
+				for (Tile* current = neighbors[i]; current != NULL; current = parent[current])
+				{
+					path.push_back(current);
+				}
+				std::reverse(path.begin(), path.end());
+				this->getMap()->resetColor();
+				for (int j = 0; j < path.size(); j++)
+				{
+					path[j]->setColor(Color(125, 125, 0, 255));
+					window.clear();
+					this->getMap()->drawTiles(window);
+					window.display();
+				}
+				return;
+			}
+			if (std::find(visited.begin(), visited.end(), neighbors[i]) == visited.end())
+			{
+				parent[neighbors[i]] = tile;
+				frontier.push(neighbors[i]);
+				visited.push_back(neighbors[i]);
+			}
+		}
+	}
+}

@@ -84,6 +84,62 @@ std::vector<Tile*> TileMap::getNeighbors(Tile& tile)
 	}
 	return vec;
 }
+std::vector<Tile*> TileMap::getNeighborsWalls(Tile& tile)
+{
+	std::vector<Tile*> vec;
+	sf::Vector2f directions[4] = {
+		Vector2f(0, -1),
+		Vector2f(1, 0),
+		Vector2f(0, 1),
+		Vector2f(-1, 0)
+	};
+	Vector2f newPos;
+	for (int i = 0; i < 4; i++)
+	{
+		Direction dir = static_cast<Direction>(i);
+		newPos = tile.getPosition() + directions[i];
+		switch (dir)
+		{
+		case Direction::Up:
+			if (!tile.hasWall(Direction::Up))
+			{
+				vec.push_back(&tiles[int(newPos.x)][int(newPos.y)]);
+			}
+			break;
+		case Direction::Down:
+			if (!tile.hasWall(Direction::Down))
+			{
+				vec.push_back(&tiles[int(newPos.x)][int(newPos.y)]);
+			}
+			break;
+		case Direction::Left:
+			if (!tile.hasWall(Direction::Left))
+			{
+				vec.push_back(&tiles[int(newPos.x)][int(newPos.y)]);
+			}
+			break;
+		case Direction::Right:
+			if (!tile.hasWall(Direction::Right))
+			{
+				vec.push_back(&tiles[int(newPos.x)][int(newPos.y)]);
+			}
+			break;
+
+		}
+
+	}
+	return vec;
+}
+void TileMap::resetColor()
+{
+	for (int i = 0; i < MAP_SIZE; i++)
+	{
+		for (int j = 0; j < MAP_SIZE; j++)
+		{
+			this->at(i, j).setColor(Color(255, 255, 255, 255));
+		}
+	}
+}
 void TileMap::removeWallsBetween(Tile& start, Tile& end)
 {
 	sf::Vector2f directionVector = end.getPosition() - start.getPosition();

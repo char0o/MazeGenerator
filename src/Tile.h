@@ -16,6 +16,8 @@ public:
 	void draw(RenderWindow& window);
 	void createWalls();
 	void removeWall(Direction direction);
+	bool hasWall(Direction direction);
+	bool operator==(const Tile& other) const;
 private:
 	const int size = 32;
 	Vector2f position;

@@ -1,6 +1,8 @@
 #pragma once
 #include <set>
+#include <queue>
 #include "TileMap.h"
+#include <unordered_map>
 #include <random>
 #include <algorithm>
 #include <cstdlib>
@@ -14,6 +16,7 @@ public:
 	Tile& getEndTile();
 	void backTracker(Tile& current, std::set<Tile*>& visited);
 	void generateEndTile();
+	void bfs(Tile& start, RenderWindow& window);
 private:
 	TileMap* map;
 	Tile* endTile;
