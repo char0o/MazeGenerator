@@ -57,8 +57,11 @@ void Maze::generateEndTile()
 	}
 	this->endTile = &this->getMap()->at(position.x, position.y);
 }
-void Maze::backTracker(Tile& current, std::set<Tile*>& visited)
+void Maze::backTracker(Tile& current, std::set<Tile*>& visited, RenderWindow& window)
 {
+	window.clear();
+	this->getMap()->drawTiles(window);
+	window.display();
 	visited.insert(&current);
 	std::vector<Tile*> neighbors = map->getNeighbors(current);
 	std::shuffle(std::begin(neighbors), std::end(neighbors), this->rng);
@@ -67,7 +70,8 @@ void Maze::backTracker(Tile& current, std::set<Tile*>& visited)
 		if (visited.find(neighbors[i]) == visited.end())
 		{
 			map->removeWallsBetween(current, *neighbors[i]);
-			backTracker(*neighbors[i], visited);
+			backTracker(*neighbors[i], visited, window);
+
 		}
 	}
 }

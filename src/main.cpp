@@ -12,8 +12,8 @@ int main()
     window.setFramerateLimit(60);
     Maze* maze = new Maze(16, 16);
     std::set<Tile*> visited;
-    maze->backTracker(maze->getEndTile(), visited);
-    maze->bfs(maze->getMap()->at(4, 4), window);
+    
+    
     while(window.isOpen())
     {
         for (sf::Event event = sf::Event{}; window.pollEvent(event);)
@@ -21,6 +21,17 @@ int main()
             if (event.type == sf::Event::Closed)
             {
                 window.close();
+            }
+            if (event.type == sf::Event::KeyPressed)
+            {
+                if (event.key.code == sf::Keyboard::Enter)
+                {
+                    maze->bfs(maze->getMap()->at(4, 4), window);
+                }
+                if (event.key.code == sf::Keyboard::W)
+                {
+                    maze->backTracker(maze->getEndTile(), visited, window);;
+                }
             }
         }
 

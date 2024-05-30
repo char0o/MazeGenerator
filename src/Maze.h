@@ -14,7 +14,7 @@ public:
 	TileMap* getMap();
 	void setEndTile(Tile& endTile);
 	Tile& getEndTile();
-	void backTracker(Tile& current, std::set<Tile*>& visited);
+	void backTracker(Tile& current, std::set<Tile*>& visited, RenderWindow& window);
 	void generateEndTile();
 	void bfs(Tile& start, RenderWindow& window);
 private:
