@@ -10,8 +10,9 @@ int main()
     auto window = sf::RenderWindow{ { 1920u, 1080u }, "Maze generator" };
     window.setFramerateLimit(144);
     Maze* maze = new Maze(16, 16);
-    maze->getMap()->removeWallsBetween(maze->getMap()->at(2, 2), maze->getMap()->at(3, 2));
-    while (window.isOpen())
+    std::set<Tile*> visited;
+    maze->backTracker(maze->getMap()->at(0, 0), visited);
+    while(window.isOpen())
     {
         for (sf::Event event = sf::Event{}; window.pollEvent(event);)
         {

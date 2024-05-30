@@ -1,6 +1,8 @@
 #pragma once
 #include <set>
 #include "TileMap.h"
+#include <random>
+#include <algorithm>
 class Maze {
 public:
 	Maze();
@@ -11,4 +13,5 @@ public:
 private:
 	TileMap* map;
 	std::set<Tile*> visited;
+	std::default_random_engine rng;
 };
