@@ -16,7 +16,7 @@ public:
 	void drawTiles(sf::RenderWindow& window);
 	void removeWallsBetween(Tile& start, Tile& end);
 	std::vector<Tile*> getNeighbors(Tile& tile);
-	std::vector<Tile*> TileMap::getNeighborsWalls(Tile& tile);
+	std::vector<Tile*> getNeighborsWalls(Tile& tile);
 	void resetColor();
 private:
 	Tile** tiles;
